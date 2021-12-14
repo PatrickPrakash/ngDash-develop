@@ -10,9 +10,10 @@ export class ImageUploaderService {
   s3Client = new S3Client({ region: REGION });
 
   async uploadFile(file: Express.Multer.File) {
+    let r = (Math.random() + 1).toString(36).substring(7);
     const bucketParms = {
       Bucket: 'ngdash-profile-image-bucket',
-      Key: `${file.filename}.png`,
+      Key: `${r}--${file.originalname}`,
       Body: file.buffer,
     };
 
